@@ -1,5 +1,3 @@
-Voici un modèle de **README technique** en français pour expliquer comment installer, lancer, arrêter et exécuter un notebook avec vos conteneurs Docker.
-
 ---
 
 # README Technique
