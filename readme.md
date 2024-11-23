@@ -1,5 +1,3 @@
----
-
 # README Technique
 
 ## Prérequis
