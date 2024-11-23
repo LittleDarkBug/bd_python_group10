@@ -17,7 +17,7 @@ Avant de commencer, assurez-vous que vous avez les outils suivants installés su
 Dans le répertoire contenant le fichier `docker-compose.yml`, exécutez la commande suivante pour démarrer tous les services (PostgreSQL, MongoDB, pgAdmin, Mongo Express, et le service Python avec Jupyter) :
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Cela démarrera les conteneurs en arrière-plan, chacun ayant ses propres services associés :
