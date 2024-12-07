@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - mynetwork
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_container
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express_container
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongo_container
+    ports:
+      - "8081:8081"
+    networks:
+      - mynetwork
+      
+  python-service:
+    image: python:3.10-slim
+    container_name: python_service_container
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: bash -c "pip install pandas numpy psycopg2-binary pymongo jupyter && tail -f /dev/null"
+    networks:
+      - mynetwork
+    depends_on:
+      - postgres
+      - mongodb
+    ports:
+      - "8888:8888"
+
+
+networks:
+  mynetwork:
+    driver: bridge
