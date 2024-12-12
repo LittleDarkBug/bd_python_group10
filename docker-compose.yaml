@@ -43,9 +43,10 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
       ME_CONFIG_MONGODB_SERVER: mongo_container
+      ME_CONFIG_MONGODB_PORT: 27017  # Ensure this matches your MongoDB server's port
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin  # Database to authenticate against
+      ME_CONFIG_SITE_BASEURL: /  # Optional: base URL for mongo-express if deployed behind a proxy  # Ensure the port is available for access
     ports:
       - "8081:8081"
     networks:
